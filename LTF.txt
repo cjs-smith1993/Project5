@@ -1,0 +1,27 @@
+Schemes:
+  a(peach1,plum2,pear3)
+  b(we,speak,in)
+  c(i,hello1,yodel2,jess)
+  d(dee,dah,thing)
+Facts:
+  a('l33t','string2','ruff').
+  b('somuchtime','isn''t','good').
+  c('entendu','daisy','degausser').
+Rules:
+  HasSameAddress(X,Y) :- snap(A,X,B,C),snap(D,Y,B,E).
+  Test(X) :- testing('one',two,(R*(a+a)),'test',e).
+  One(two) :- word((w+w),q).
+  One(two) :- word(a,(w+w),q).
+  One(two) :- word(zed,(w+w)).
+  One(two) :- HasSameAddress('Snoopy',Who,(d+w),e,'ere',e),word((w+w),a),werd2((a*a),yolo,'string'),werd3('string'),werd4((x+y),sinx).
+Queries:
+  query(normal,'string',(a+b))?
+  query2((a+b),'yolo',id12,'string','string2','string3')?
+  query3((a*b),(c*d))?
+  query4(a,b,c,d)?
+  query6((a*(b+c)),hello)?
+  query6((a*(b+c)))?
+  query7((a*(b+c)),(alex+chelsea))?
+  query8((a*(b+(me*(anoter+(anottter*expressao))))),(alex+chelsea))?
+  query9((a*(b+(me*(hello+(hello2+hello1))))),(alex+chelsea))?
+  query10((a*(b+(me*(hello+(hello2+hello1))))),(a*(b+(me*(hello+(hello2+(a*(b+(me*(hello+(hello2+(a*(b+(me*(hello+(hello2+hello1))))))))))))))),(alex+chelsea))?

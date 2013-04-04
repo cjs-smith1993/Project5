@@ -1,0 +1,45 @@
+Schemes:
+    c(A,B,E)
+    b(C,D)
+Facts:
+    b('1','1').
+    b('1','2').
+    b('2','3').
+    c('3','4','3').
+    c('1','4','5').
+    c('1','2','1').
+    c('2','4','2').
+
+Rules:
+Queries:
+    b('1',x)?
+    b('2',x)?
+    b(x,y)?
+    b(x,x)?
+    c(x,'4',x)?
+#|
+Schemes:
+
+    SK(A,B)
+
+Facts:
+
+    SK('a','c').
+
+    SK('b','c').
+
+    SK('b','b').
+
+    SK('b','c').
+
+Rules:
+
+Queries:
+
+    SK(X,'c')?
+
+    SK('b','c')?
+
+    SK(X,X)?
+
+    SK(X,Y)?

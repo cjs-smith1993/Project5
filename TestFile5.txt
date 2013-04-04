@@ -1,0 +1,30 @@
+Schemes:
+   ssss(s1, s2, s3, s4)
+Facts:
+ssss('joe', 'jim', 'jerry', 'jill').
+
+
+#one variable changed to jim
+ssss('jim','joe','joe','joe').
+ssss('joe','jim','joe','joe').
+ssss('joe','joe','jim','joe').
+ssss('joe','joe','joe','jim').
+
+#pairs changed to jerry
+ssss('joe','joe','jerry','jerry').
+ssss('joe','jerry','joe','jerry').
+ssss('joe','jerry','jerry','joe').
+   
+Rules:
+Queries:
+ssss(w,x,y,z)?
+ssss(x,x,x,x)?
+
+ssss(y,x,x,x)?
+ssss(x,y,x,x)?
+ssss(x,x,y,x)?
+ssss(x,x,x,y)?
+
+ssss(x,x,y,y)?
+ssss(x,y,y,x)?
+ssss(x,y,x,y)?
