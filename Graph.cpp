@@ -10,5 +10,5 @@
 
 
 void Graph::genPO(){
-  std::stack pogen;
+  std::stack DFTstack;
 }
