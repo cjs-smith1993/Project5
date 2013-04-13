@@ -17,5 +17,5 @@ Graph::Graph(std::vector<Rule*> rules) {
 }
 
 void Graph::genPONums(){
-  std::stack<int> DFTstack;
+  std::stack<string> DFTstack;
 }
