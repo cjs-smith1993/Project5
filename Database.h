@@ -23,6 +23,7 @@ public:
     std::vector<Rule*> rules;
     std::vector<std::string> domain;
     DatalogProgram* parser;
+    Graph* g;
     
     Database(DatalogProgram* parser);
     ~Database();

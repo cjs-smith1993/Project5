@@ -14,13 +14,14 @@
 #include <list>
 #include <stack>
 #include <map>
+#include <set>
 
 #include "Rule.h"
 
 class Graph {
     
 public:
-    std::vector<std::list<std::string> > adjList;
+    std::vector<std::vector<std::string> > adjList;
     std::map<std::string, int> postNums;
     
     Graph();

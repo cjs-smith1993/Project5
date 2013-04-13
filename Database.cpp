@@ -21,6 +21,7 @@ Database::Database(DatalogProgram* p) {
     
     addTuples(); //Populate the database
     addRules(); //Add the rules to the database
+    g = new Graph(rules); //Generate a depends-on graph for the rules
     //processRules(); //Generate new facts
 }
 
@@ -71,12 +72,9 @@ void Database::processQueries () {
 }
 
 void Database::processRules(std::string queryName) {
-    Graph* g = new Graph(rules); //Generate an depends-on graph
-    
-    
     g->genPONums(queryName); //Generate the post-order numbers for the query
     
-    if (true/*g->detectCycles()*/) {
+    if (g->detectCycles()) {
         int numFacts = 0;
         int passes = 0;
         do {
@@ -95,8 +93,6 @@ void Database::processRules(std::string queryName) {
             processRule(rules.at(i)); //Generate new facts
         }
     }
-    
-    delete g;
 }
 
 void Database::processRule(Rule* rule) {
