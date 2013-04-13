@@ -59,13 +59,13 @@ Graph::~Graph() {
     
 }
 
-void Graph::genPONums(){
+void Graph::genPONums(std::string queryName){
   std::stack<string> DFTstack;
-  std::map<std::string, bool> hbv;
+  std::map<std::string, bool> visited;
   
-  for(int i=0; i<adjacencyList.size();i++)
+  for(int i = 0; i < adjList.size(); i++)
   {
-    for(int j=0; j<adjacencyList.at(i).size();j++)
+    for(int j = 0; j < adjList.at(i).size(); j++)
     {
       //go through the interator of at(i);
     }
