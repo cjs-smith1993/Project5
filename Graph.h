@@ -15,6 +15,8 @@ class Graph {
     
 public:
     
+
+void genPO();
     
 };
 
