@@ -10,6 +10,7 @@
 #define __Project5__Graph__
 
 #include <iostream>
+#include <stack>
 
 class Graph {
     
