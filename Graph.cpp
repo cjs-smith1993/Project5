@@ -16,6 +16,6 @@ Graph::Graph(std::vector<Rule*> rules) {
     
 }
 
-void Graph::genPONums(){
+void Graph::genPONums(std::string queryName){
   std::stack<string> DFTstack;
 }

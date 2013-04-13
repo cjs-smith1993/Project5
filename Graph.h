@@ -26,7 +26,7 @@ public:
     Graph();
     Graph(std::vector<Rule*> rules);
     ~Graph();
-    void genPONums();
+    void genPONums(std::string queryName);
     bool detectCycles();
 
 };
