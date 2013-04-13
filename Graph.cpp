@@ -9,6 +9,6 @@
 #include "Graph.h"
 
 
-void Graph::genPO(){
+void Graph::genPONums(){
   std::stack pogen;
 }
