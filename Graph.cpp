@@ -7,3 +7,8 @@
 //
 
 #include "Graph.h"
+
+
+void Graph::genPO(){
+  std::stack pogen;
+}
