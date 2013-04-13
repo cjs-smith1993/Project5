@@ -21,7 +21,7 @@ Database::Database(DatalogProgram* p) {
     
     addTuples(); //Populate the database
     addRules(); //Add the rules to the database
-    processRules(); //Generate new facts
+    //processRules(); //Generate new facts
 }
 
 Database::~Database() {
@@ -60,27 +60,43 @@ void Database::processQueries () {
         
         for (int j = 0; j < relations.size(); j++) { //Loop through the list of relations
             if (name.compare(relations.at(j)->name) == 0) { //If the query's schema matches a relation
+                processRules(name);
                 Relation* r = relations.at(j)->processQuery(pred.at(i)->parl); //Process the query with that relation
                 std::cout << r->print(pred.at(i)->parl);
             }
         }
     }
     
-    std::cout << "Done!";
+    //std::cout << "Done!";
 }
 
-void Database::processRules() {
-    int numFacts = 0;
-    int passes = 0;
-    do {
-        passes++;
-        numFacts = getNumFacts(); //Get the current number of facts
-        for (int i = 0; i < rules.size(); i++) { //Loop through the rules
+void Database::processRules(std::string queryName) {
+    Graph* g = new Graph(rules); //Generate an depends-on graph
+    
+    
+    g->genPONums(queryName); //Generate the post-order numbers for the query
+    
+    if (true/*g->detectCycles()*/) {
+        int numFacts = 0;
+        int passes = 0;
+        do {
+            passes++;
+            numFacts = getNumFacts(); //Get the current number of facts
+            for (int i = 0; i < rules.size(); i++) { //Loop through the rules
+                processRule(rules.at(i)); //Generate new facts
+            }
+        } while (numFacts != getNumFacts()); //Repeat until no new facts have been generated
+
+        //std::cout << "Schemes populated after " << passes << " passes through the Rules.\n";
+    }
+    
+    else {
+        for (int i = 0; i < rules.size(); i++) { //Loop through the rules once
             processRule(rules.at(i)); //Generate new facts
         }
-    } while (numFacts != getNumFacts()); //Repeat until no new facts have been generated
+    }
     
-    std::cout << "Schemes populated after " << passes << " passes through the Rules.\n";
+    delete g;
 }
 
 void Database::processRule(Rule* rule) {

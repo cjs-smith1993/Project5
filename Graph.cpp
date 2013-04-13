@@ -8,6 +8,13 @@
 
 #include "Graph.h"
 
+Graph::Graph() {
+    
+}
+
+Graph::Graph(std::vector<Rule*> rules) {
+    
+}
 
 void Graph::genPONums(){
   std::stack<int> DFTstack;

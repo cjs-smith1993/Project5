@@ -15,6 +15,7 @@
 #include "Relation.h"
 #include "Rule.h"
 #include "DatalogProgram.h"
+#include "Graph.h"
 
 class Database {
 public:
@@ -29,7 +30,7 @@ public:
     void addTuples();
     void addRules();
     void processQueries();
-    void processRules();
+    void processRules(std::string queryName);
     void processRule(Rule* r);
     
     Relation* join(std::vector<Relation*> relationList);

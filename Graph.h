@@ -26,7 +26,6 @@ public:
     Graph();
     Graph(std::vector<Rule*> rules);
     ~Graph();
-    void createAdjList();
     void genPONums();
     bool detectCycles();
 
