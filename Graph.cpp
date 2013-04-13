@@ -10,5 +10,5 @@
 
 
 void Graph::genPONums(){
-  std::stack pogen;
+  std::stack<int> DFTstack;
 }
