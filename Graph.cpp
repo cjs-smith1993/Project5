@@ -8,14 +8,16 @@
 
 #include "Graph.h"
 
-Graph::Graph() {
-    
-}
 
-Graph::Graph(std::vector<Rule*> rules) {
-    
-}
-
-void Graph::genPONums(std::string queryName){
+void Graph::genPONums(){
   std::stack<string> DFTstack;
+  std::map<std::string, bool> hbv;
+  
+  for(int i=0; i<adjacencyList.size();i++)
+  {
+    for(int j=0; j<adjacencyList.at(i).size();j++)
+    {
+      //go through the interator of at(i);
+    }
+  }
 }
