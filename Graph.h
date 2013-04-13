@@ -29,6 +29,7 @@ public:
     ~Graph();
     void genPONums(std::string queryName);
     bool detectCycles();
+    void print();
 
 };
 
