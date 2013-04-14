@@ -66,13 +66,35 @@ Graph::~Graph() {
 void Graph::genPONums(std::string queryName){
   std::stack<string> DFTstack;
   std::map<std::string, bool> visited;
+  int line=0;
   
-  for(int i = 0; i < adjList.size(); i++)
+  //problems
+  //while adding things to the visited how to associate predicates with head predicates
+  //from there should be able to go through and push and pop on the stack accordingly
+  for(int i = 0; i < adjList.size(); i++)//add all predicates to the visited map; go through lists
   {
-    for(int j = 0; j < adjList.at(i).size(); j++)
+    for(int j = 0; j < adjList.at(i).size(); j++)// go through content of each list to add to visited
     {
       //go through the interator of at(i);
+      node* temp=adjList.at(i).begin().//value???;
+      visited.insert (temp, false);
+      temp=temp.next();
+      
     }
+  }
+  
+  //start at queryName;
+  for(int i = 0; i < visited.size(); i++)
+  {
+      if(visited.at(i)==false)
+      {
+         DFTstack.push_back(map.at(i)->first);
+         visited.at(i)=true;
+      }
+      else
+      {
+          
+      }
   }
 }
 
