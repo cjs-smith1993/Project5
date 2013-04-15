@@ -64,40 +64,33 @@ Graph::~Graph() {
 }
 
 void Graph::genPONums(std::string queryName){
-    /*
-  std::stack<string> DFTstack;
-  std::map<std::string, bool> visited;
-  int line=0;
+    
+  std::stack<string> DFT;
+  std::set<std::string, bool> visited;
+  int curNum=1;
+  
   
   //problems
   //while adding things to the visited how to associate predicates with head predicates
   //from there should be able to go through and push and pop on the stack accordingly
-  for(int i = 0; i < adjList.size(); i++)//add all predicates to the visited map; go through lists
-  {
-    for(int j = 0; j < adjList.at(i).size(); j++)// go through content of each list to add to visited
-    {
-      //go through the interator of at(i);
-      node* temp=adjList.at(i).begin().//value???;
-      visited.insert (temp, false);
-      temp=temp.next();
-      
+    DFT.push(queryName);
+    while(!DFT.empty()){
+        int pos=-1;
+        if(adjList.at(i).at(0).compare(DFT.top()) == 0){
+            pos=i;
+            if(visited.count(adjList.at(pos).at(i))==0){
+                visited.insert(adjList.at(pos).at(i));
+                DFT.push(adjList.at(pos).at(i));
+                break;
+            }
+            else if(i== adjList.at(pos).size()-1){
+                PONums[DFT.top()] = curNum;
+                curNum++;
+                DFT.pop();
+            }
+        }
+        
     }
-  }
-  
-  //start at queryName;
-  for(int i = 0; i < visited.size(); i++)
-  {
-      if(visited.at(i)==false)
-      {
-         DFTstack.push_back(map.at(i)->first);
-         visited.at(i)=true;
-      }
-      else
-      {
-          
-      }
-  }
-     */
 }
 
 bool Graph::detectCycles() {
