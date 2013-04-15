@@ -1,0 +1,20 @@
+Schemes:
+abcde(A,B,C,D,E)
+abc(A,B,C)
+bcd(B,C,D)
+cde(C,D,E)
+any(A)
+
+Facts:
+ any('a').
+ any('b').
+ any('c').
+ any('d').
+ any('e').
+Rules:
+ abc(A,B,C) :- any(A),any(B),any(C).
+ bcd(B,C,D) :- abc(X,B,C),any(D).
+ cde(C,D,E) :- bcd(X,C,D),any(E).
+ abcde(A,B,C,D,E) :- abc(A,B,C),bcd(B,C,D),cde(C,D,E).
+Queries:
+ abcde(A,B,C,D,E)?
