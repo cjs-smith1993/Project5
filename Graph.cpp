@@ -84,7 +84,7 @@ void Graph::genPONums(std::string queryName){
                 break;
             }
             else if(i== adjList.at(pos).size()-1){
-                PONums[DFT.top()] = curNum;
+                postNums[DFT.top()] = curNum;
                 curNum++;
                 DFT.pop();
             }
