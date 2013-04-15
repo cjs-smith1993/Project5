@@ -74,24 +74,34 @@ void Database::processQueries () {
 
 void Database::processRules(std::string queryName) {
     g->genPONums(queryName); //Generate the post-order numbers for the query
-    
-    if (g->detectCycles()) {
+        
+    if (g->detectCycles()) { //If there are cycles, run the least fixed-point algorithm
         int numFacts = 0;
         int passes = 0;
         do {
             passes++;
             numFacts = getNumFacts(); //Get the current number of facts
-            for (int i = 0; i < rules.size(); i++) { //Loop through the rules
-                processRule(rules.at(i)); //Generate new facts
+            
+            for (int postNum = 1; postNum <= g->adjList.size(); postNum++) { //Loop through the post-order numbers
+                for (int i = 0; i < rules.size(); i++) { //Loop through the list of rules
+                    if (postNum == g->postNums[rules.at(i)->first->getTokensValue()]) { //If the current rule's post-order number matches the current post-order number
+                        processRule(rules.at(i)); //Process the rule
+                    }
+                }
             }
+            
         } while (numFacts != getNumFacts()); //Repeat until no new facts have been generated
 
-        std::cout << "Schemes populated after " << passes << " passes through the Rules.\n";
+        //std::cout << "Schemes populated after " << passes << " passes through the Rules.\n";
     }
     
-    else {
-        for (int i = 0; i < rules.size(); i++) { //Loop through the rules once
-            processRule(rules.at(i)); //Generate new facts
+    else { //If there are no cycles
+        for (int postNum = 1; postNum <= g->adjList.size(); postNum++) { //Loop through the post-order numbers
+            for (int i = 0; i < rules.size(); i++) { //Loop through the list of rules
+                if (postNum == g->postNums[rules.at(i)->first->getTokensValue()]) { //If the current rule's post-order number matches the current post-order number
+                    processRule(rules.at(i)); //Process the rule
+                }
+            }
         }
     }
 }
