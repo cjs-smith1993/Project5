@@ -64,6 +64,7 @@ void Database::processQueries () {
                 processRules(name);
                 Relation* r = relations.at(j)->processQuery(pred.at(i)->parl); //Process the query with that relation
                 std::cout << r->print(pred.at(i)->parl);
+                break;
             }
         }
     }
@@ -85,7 +86,7 @@ void Database::processRules(std::string queryName) {
             }
         } while (numFacts != getNumFacts()); //Repeat until no new facts have been generated
 
-        //std::cout << "Schemes populated after " << passes << " passes through the Rules.\n";
+        std::cout << "Schemes populated after " << passes << " passes through the Rules.\n";
     }
     
     else {

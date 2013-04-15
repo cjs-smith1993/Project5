@@ -65,31 +65,45 @@ Graph::~Graph() {
 
 void Graph::genPONums(std::string queryName){
     
-  std::stack<string> DFT;
-  std::set<std::string, bool> visited;
-  int curNum=1;
-  
-  
-  //problems
-  //while adding things to the visited how to associate predicates with head predicates
-  //from there should be able to go through and push and pop on the stack accordingly
-    DFT.push(queryName);
-    while(!DFT.empty()){
-        int pos=-1;
-        if(adjList.at(i).at(0).compare(DFT.top()) == 0){
-            pos=i;
-            if(visited.count(adjList.at(pos).at(i))==0){
-                visited.insert(adjList.at(pos).at(i));
-                DFT.push(adjList.at(pos).at(i));
+    std::stack<string> DFT;
+    std::set<std::string> visited;
+    int postNum = 1;
+
+    DFT.push(queryName); //Start at the rule the query references
+    visited.insert(queryName);
+    
+    while(!DFT.empty()){ //While the stack isn't empty
+        int pos = -1;
+        for (int i = 0; i < adjList.size(); i++) { //Loop through the list of rule heads
+            if (adjList.at(i).at(0).compare(DFT.top()) == 0) { //Find the rule matching the top of the stack
+                pos = i; //Remember where the rule is
                 break;
-            }
-            else if(i== adjList.at(pos).size()-1){
-                postNums[DFT.top()] = curNum;
-                curNum++;
-                DFT.pop();
             }
         }
         
+        if (pos == -1) { //If the query doesn't depend on a rule head, don't attempt to assign post-order numbers
+            return;
+        }
+        
+        if (adjList.at(pos).size() == 1) { //If the rule head doesn't depend on any other rule heads, pop it
+            postNums[DFT.top()] = postNum; //Assign a post-order number to the rule
+            postNum++; //Increment the post-order number for the next rule
+            DFT.pop(); //Pop the rule off the stack
+        }
+        
+        for (int i = 1; i < adjList.at(pos).size(); i++) { //Loop through the list of rules the head depends on
+            if (visited.count(adjList.at(pos).at(i)) == 0){ //If a rule is reached that hasn't been marked
+                visited.insert(adjList.at(pos).at(i)); //Mark it
+                DFT.push(adjList.at(pos).at(i)); //Push it onto the stack
+                break; //Break out of the loop so only one rule is added
+            }
+            
+            else if (i == adjList.at(pos).size() - 1) { //If there are no more rules to visit
+                postNums[DFT.top()] = postNum; //Assign a post-order number to the rule
+                postNum++; //Increment the post-order number for the next rule
+                DFT.pop(); //Pop the rule off the stack
+            }
+        }
     }
 }
 
@@ -100,11 +114,13 @@ bool Graph::detectCycles() {
         for (int j = 1; j < adjList.at(i).size(); j++) { //Loop through all of the rules the current head depends on
             if (postNums[adjList.at(i).at(0)] <= postNums[adjList.at(i).at(j)]) { //If there is a backward edge
                 cycles = true;
+                break;
             }
         }
+        if (cycles)
+            break;
     }
     
-    std::cout << cycles << endl;
     return cycles;
 }
 

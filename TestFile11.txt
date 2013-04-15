@@ -4,6 +4,7 @@ Schemes:
   GPA(P,G)
   SmartAncestor(S,P)
   GT(X,Y)
+  Smart(X)
   
 Facts:
   Parent('Pat','Kelly').
