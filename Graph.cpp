@@ -64,6 +64,7 @@ Graph::~Graph() {
 }
 
 void Graph::genPONums(std::string queryName){
+    /*
   std::stack<string> DFTstack;
   std::map<std::string, bool> visited;
   int line=0;
@@ -96,10 +97,22 @@ void Graph::genPONums(std::string queryName){
           
       }
   }
+     */
 }
 
 bool Graph::detectCycles() {
-    return true;
+    bool cycles = false;
+    
+    for (int i = 0; i < adjList.size(); i++) { //Loop through all of the rules
+        for (int j = 1; j < adjList.at(i).size(); j++) { //Loop through all of the rules the current head depends on
+            if (postNums[adjList.at(i).at(0)] <= postNums[adjList.at(i).at(j)]) { //If there is a backward edge
+                cycles = true;
+            }
+        }
+    }
+    
+    std::cout << cycles << endl;
+    return cycles;
 }
 
 void Graph::print() {
